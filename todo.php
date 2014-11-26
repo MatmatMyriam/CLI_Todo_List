@@ -38,6 +38,7 @@ do {
         // Remove from array
         unset($items[$key]);
         // reindex numerical array
+        $items = array_values($items);
     }
 // Exit when input is (Q)uit
 } while ($input != 'Q');
