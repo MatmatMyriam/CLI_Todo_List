@@ -3,15 +3,42 @@
 // Create array to hold list of todo items
 $items = array();
 
+// unset($items[0]);
+
+// List array items formatted for CLI
+function list_items($list) 
+{
+    $x = '';
+    foreach($list as $key => $item) 
+    {
+        $key++;
+        $x .= "[{$key}] {$item}\n";
+    }
+    return $x;
+     // Return string of list items separated by newlines.
+     // Should be listed [KEY] Value like this:
+     // [1] TODO item 1
+     // [2] TODO item 2 - blah
+     // DO NOT USE ECHO, USE RETURN
+}
+
+ // Get STDIN, strip whitespace and newlines,
+ // and convert to uppercase if $upper is true
+ function getInput($upper = false) 
+ {
+     // Return filtered STDIN input
+ }
+
 // The loop!
 do {
-    // Iterate through list items
-    foreach ($items as $key => $item) {
-        // begining index at [1]
-        $key++;
-        // Display each item and a newline
-        echo "[{$key}] {$item}\n";
-    }
+    echo list_items($items);
+//     // Iterate through list items
+//     foreach ($items as $key => $item) {
+//         // begining index at [1]
+//         $key++;
+//         // Display each item and a newline
+//         echo "[{$key}] {$item}\n";
+//     }
 
     // Show the menu options
     echo '(N)ew item, (R)emove item, (Q)uit : ';
@@ -23,7 +50,7 @@ do {
     $input = strtoupper($input);
 
     // Check for actionable input
-    if ($input == 'N') {
+if ($input == 'N') {
         // Ask for entry
         echo 'Enter item: ';
         // Add entry to list array
