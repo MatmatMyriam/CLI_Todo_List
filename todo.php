@@ -74,11 +74,18 @@ do {
 
     // Check for actionable input
 if ($input == 'N') {
-        // Ask for entry
-        echo 'Enter item: ';
-        // Add entry to list array
-        $items[] = trim(fgets(STDIN));
-        $orig_items = $items;
+                echo 'Enter item: ';
+                // Add entry to list array
+                $new_item = trim(fgets(STDIN));
+                $orig_items = $items;
+        echo 'Add it to the (B)egining or (E)nd of the list: ';     
+        $begin_item = getInput(true);
+            if ($begin_item == 'B') {
+            $item = array_unshift($items, $new_item);
+        } else {
+            $item = array_push($items, $new_item);
+        }
+
     } elseif ($input == 'R') {
         // Remove which item?
         echo 'Enter item number to remove: ';
