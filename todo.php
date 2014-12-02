@@ -104,6 +104,8 @@ if ($input == 'N') {
         $items = sortArray($items, $orig_items); 
     } elseif ($input == 'R') {
         $items = array_values($items);
+    } elseif ($input == 'F') {
+        $item = array_shift($items);
     }
 
 // Exit when input is (Q)uit
