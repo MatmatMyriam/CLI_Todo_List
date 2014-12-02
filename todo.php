@@ -36,6 +36,22 @@ function list_items($list)
     }
  }
 
+function sortArray($array, $orig_items){
+    $input = getInput(true);
+
+    if ($input == 'A') {
+        asort($array);
+    } elseif ($input == 'Z') {
+        arsort($array);
+    } elseif ($input == 'O') {
+        return $orig_items;
+    } elseif ($input == 'R') {
+        $array = $orig_items;
+        krsort($array);
+    }   
+    return $array;
+}
+
 // The loop!
 do {
     echo list_items($items);
@@ -78,21 +94,12 @@ if ($input == 'N') {
         // Sort options
         echo '(A)-Z, (Z)-A, (O)rder entered, (R)everse order entered: ';
         // Get array key
-        $input = trim(fgets(STDIN));
-        $input = strtoupper($input);
-            if ($input == 'A') {
-            asort($items);
-            } elseif ($input == 'Z') {
-            arsort($items);
-            } elseif ($input == 'O') {
-            $items = $orig_items;
-            } elseif ($input == 'R') {
-            $items = $orig_items;
-            krsort($items);
+        
+        $items = sortArray($items, $orig_items); 
     } elseif ($input == 'R') {
         $items = array_values($items);
     }
-}
+
 // Exit when input is (Q)uit
 } while ($input != 'Q');
 
