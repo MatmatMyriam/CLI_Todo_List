@@ -2,6 +2,8 @@
 
 // Create array to hold list of todo items
 $items = array();
+$azsort = $items;
+$orig_items = $items;
 
 // unset($items[0]);
 
@@ -9,8 +11,7 @@ $items = array();
 function list_items($list) 
 {
     $x = '';
-    foreach($list as $key => $item) 
-    {
+    foreach($list as $key => $item) {
         $key++;
         $x .= "[{$key}] {$item}\n";
     }
@@ -27,6 +28,12 @@ function list_items($list)
  function getInput($upper = false) 
  {
      // Return filtered STDIN input
+    if ($upper) {
+        return strtoupper(trim(fgets(STDIN)));
+    } else {
+        return (trim(fgets(STDIN)));
+
+    }
  }
 
 // The loop!
@@ -41,7 +48,7 @@ do {
 //     }
 
     // Show the menu options
-    echo '(N)ew item, (R)emove item, (Q)uit : ';
+    echo '(N)ew item, (R)emove item, (S)ort list, (Q)uit : ';
 
     // Get the input from user
     // Use trim() to remove whitespace and newlines
@@ -55,6 +62,7 @@ if ($input == 'N') {
         echo 'Enter item: ';
         // Add entry to list array
         $items[] = trim(fgets(STDIN));
+        $orig_items = $items;
     } elseif ($input == 'R') {
         // Remove which item?
         echo 'Enter item number to remove: ';
@@ -66,7 +74,25 @@ if ($input == 'N') {
         unset($items[$key]);
         // reindex numerical array
         $items = array_values($items);
+    } elseif ($input == 'S') {
+        // Sort options
+        echo '(A)-Z, (Z)-A, (O)rder entered, (R)everse order entered: ';
+        // Get array key
+        $input = trim(fgets(STDIN));
+        $input = strtoupper($input);
+            if ($input == 'A') {
+            asort($items);
+            } elseif ($input == 'Z') {
+            arsort($items);
+            } elseif ($input == 'O') {
+            $items = $orig_items;
+            } elseif ($input == 'R') {
+            $items = $orig_items;
+            krsort($items);
+    } elseif ($input == 'R') {
+        $items = array_values($items);
     }
+}
 // Exit when input is (Q)uit
 } while ($input != 'Q');
 
