@@ -94,7 +94,6 @@ if ($input == 'N') {
         // Sort options
         echo '(A)-Z, (Z)-A, (O)rder entered, (R)everse order entered: ';
         // Get array key
-        
         $items = sortArray($items, $orig_items); 
     } elseif ($input == 'R') {
         $items = array_values($items);
