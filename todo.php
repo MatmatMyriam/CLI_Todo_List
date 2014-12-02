@@ -106,6 +106,8 @@ if ($input == 'N') {
         $items = array_values($items);
     } elseif ($input == 'F') {
         $item = array_shift($items);
+    } elseif ($input == 'L') {
+        $item = array_pop($items);
     }
 
 // Exit when input is (Q)uit
