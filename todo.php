@@ -52,6 +52,14 @@ function sortArray($array, $orig_items){
     return $array;
 }
 
+function readList($list) {
+        $handle = fopen($list, 'r');
+        $contents = fread($handle, filesize($list));
+        $items = explode("\n", $contents);
+        fclose($handle);
+        return $items;
+}
+
 // The loop!
 do {
     echo list_items($items);
@@ -111,10 +119,12 @@ if ($input == 'N') {
     } elseif ($input == 'O') {
         echo "Enter file path and name.  Example: data/list.txt\n";
         $list = getInput(false);
-        $handle = fopen($list, 'r');
-        $contents = fread($handle, filesize($list));
-        $items = explode("\n", $contents);
-        fclose($handle);
+        $new_items = readList($list);
+        $items = array_merge($items, $new_items);
+        // $handle = fopen($list, 'r');
+        // $contents = fread($handle, filesize($list));
+        // $items = explode("\n", $contents);
+        // fclose($handle);
     }
 
 // Exit when input is (Q)uit
