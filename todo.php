@@ -53,13 +53,17 @@ function sortArray($array, $orig_items){
 }
 
 function readList($list) {
+    $items = [];
+    if (filesize($list) == 0) {
+        echo "File is empty.";
+    } else {
         $handle = fopen($list, 'r');
         $contents = fread($handle, filesize($list));
         $items = explode("\n", $contents);
         fclose($handle);
+    }
         return $items;
 }
-
 // The loop!
 do {
     echo list_items($items);
@@ -118,7 +122,7 @@ if ($input == 'N') {
         $item = array_pop($items);
     } elseif ($input == 'O') {
         echo "Enter file path and name.  Example: data/list.txt\n";
-        $list = getInput(false);
+        $list = getInput();
         $new_items = readList($list);
         $items = array_merge($items, $new_items);
         // $handle = fopen($list, 'r');
