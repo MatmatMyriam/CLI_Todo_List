@@ -109,7 +109,8 @@ if ($input == 'N') {
     } elseif ($input == 'L') {
         $item = array_pop($items);
     } elseif ($input == 'O') {
-        $list = "data/list.txt";
+        echo "Enter file path and name.  Example: data/list.txt\n";
+        $list = getInput(false);
         $handle = fopen($list, 'r');
         $contents = fread($handle, filesize($list));
         $items = explode("\n", $contents);
