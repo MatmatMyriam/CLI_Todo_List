@@ -64,7 +64,7 @@ do {
 //     }
 
     // Show the menu options
-    echo '(N)ew item, (R)emove item, (S)ort list, (Q)uit : ';
+    echo '(N)ew item, (R)emove item, (O)pen list, (S)ort list, (Q)uit : ';
 
     // Get the input from user
     // Use trim() to remove whitespace and newlines
@@ -108,10 +108,17 @@ if ($input == 'N') {
         $item = array_shift($items);
     } elseif ($input == 'L') {
         $item = array_pop($items);
+    } elseif ($input == 'O') {
+        $list = "data/list.txt";
+        $handle = fopen($list, 'r');
+        $contents = fread($handle, filesize($list));
+        $items = explode("\n", $contents);
+        fclose($handle);
     }
 
 // Exit when input is (Q)uit
 } while ($input != 'Q');
+
 
 // Say Goodbye!
 echo "Goodbye!\n";
