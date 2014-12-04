@@ -63,21 +63,46 @@ function readList($list) {
         fclose($handle);
     }
         return $items;
-        echo "Save of {$items} was successful.";
+        echo "Save a
+        of {$items} was successful.";
 }
 
 function writeList($file_name, $contents_array) {
-    // $new_save = implode("\n", $contents_array);
+    if (file_exists($file_name)) {
+            echo "The file $file_name already exists." . PHP_EOL;
+            echo "Do you want to overwrite {$file_name}?" . PHP_EOL;
+            $overwrite = getInput(true);
+                if ($overwrite == 'N') {
+                echo "Overwrite of {$file_name} canceled." . PHP_EOL;
+                return;
+            }
+    }
+
     $handle = fopen($file_name, 'w');
     foreach ($contents_array as $key) {
-    fwrite($handle, $key);
+        fwrite($handle, $key);
 
+    }   
     fclose($handle);
-
-    }
     return "Save  of file {$file_name} was successful." . PHP_EOL;
 
 }
+
+// function fileCheck($file_name, $contents_array) {
+//     if (file_exists($file_name)) {
+//         echo "The file $file_name exists";
+//         echo "Do you want to overwrite? (Y)es or (N)o: ";
+//         $overwrite = getInput();
+//             if ($overwrite == 'Y') {
+//                 writeList($file_name, $contents_array);
+
+//             }
+// } else {
+//     echo "The file $filename does not exist";
+// }
+
+
+// }
 
 // The loop!
 do {
