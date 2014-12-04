@@ -72,7 +72,7 @@ function writeList($file_name, $contents_array) {
             echo "The file $file_name already exists." . PHP_EOL;
             echo "Do you want to overwrite {$file_name}?" . PHP_EOL;
             $overwrite = getInput(true);
-                if ($overwrite == 'N') {
+            if ($overwrite == 'N') {
                 echo "Overwrite of {$file_name} canceled." . PHP_EOL;
                 return;
             }
