@@ -63,7 +63,22 @@ function readList($list) {
         fclose($handle);
     }
         return $items;
+        echo "Save of {$items} was successful.";
 }
+
+function writeList($file_name, $contents_array) {
+    // $new_save = implode("\n", $contents_array);
+    $handle = fopen($file_name, 'w');
+    foreach ($contents_array as $key) {
+    fwrite($handle, $key);
+
+    fclose($handle);
+
+    }
+    return "Save  of file {$file_name} was successful." . PHP_EOL;
+
+}
+
 // The loop!
 do {
     echo list_items($items);
@@ -76,7 +91,7 @@ do {
 //     }
 
     // Show the menu options
-    echo '(N)ew item, (R)emove item, (O)pen list, (S)ort list, (Q)uit : ';
+    echo '(N)ew item, (R)emove item, (O)pen list, (S)ort list, s(A)ve list, (Q)uit : ';
 
     // Get the input from user
     // Use trim() to remove whitespace and newlines
@@ -129,7 +144,15 @@ if ($input == 'N') {
         // $contents = fread($handle, filesize($list));
         // $items = explode("\n", $contents);
         // fclose($handle);
+    } elseif ($input == 'A') {
+        echo "Enter path and name to save the file.  Example: data/new_list.txt\n";
+        $file_name = getInput();
+        $contents_array = [];
+        $new_items = writeList($file_name, $contents_array);
+        // $items = array_merge($items, $new_items);
+        echo $new_items;
     }
+
 
 // Exit when input is (Q)uit
 } while ($input != 'Q');
